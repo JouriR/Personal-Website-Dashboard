@@ -1,9 +1,14 @@
 import { NextPage } from "next";
 import { getApiLink } from "../imports/functions";
+import Head from "next/head";
 
 const Login: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
+
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -13,7 +18,11 @@ const Login: NextPage = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action={getApiLink() + "login"} method="POST">
+            <form
+              className="space-y-6"
+              action={getApiLink() + "login"}
+              method="POST"
+            >
               <div>
                 <label
                   htmlFor="email"
