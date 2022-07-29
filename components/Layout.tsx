@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/outline";
 
 const navigation = [
-  { name: "Projects", href: "#", icon: FolderIcon, current: true },
+  { name: "Projects", href: "/projects", icon: FolderIcon, current: true },
   { name: "Categories", href: "#", icon: FilterIcon, current: false },
 ];
 
