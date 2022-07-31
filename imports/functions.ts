@@ -1,7 +1,7 @@
 export function getApiLink() {
-  if (process.env.APP_ENV === "local") {
-    return process.env.API_LOCAL;
+  if (process.env.NEXT_PUBLIC_APP_ENV === "local") {
+    return process.env.NEXT_PUBLIC_API_LOCAL;
   } else {
-    return process.env.API_PROD;
+    return process.env.NEXT_PUBLIC_API_PROD;
   }
 }
