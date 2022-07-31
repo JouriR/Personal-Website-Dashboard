@@ -1,8 +1,39 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { getApiLink } from "../imports/functions";
+import { useAuth } from "../hooks/auth";
 import Head from "next/head";
+import AuthSessionStatus from "../components/auth/AuthSessionStatus";
+import AuthValidationErrors from "../components/auth/AuthValidationErrors";
 
 const Login: NextPage = () => {
+  const router = useRouter();
+
+  const { login } = useAuth({
+    middleware: "guest",
+    redirectIfAuthenticated: "/",
+  });
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    if (router.query.reset?.length > 0 && errors.length === 0) {
+      setStatus(atob(router.query.reset));
+    } else {
+      setStatus(null);
+    }
+  });
+
+  const submitForm = async (event) => {
+    event.preventDefault();
+
+    login({ email, password, setErrors, setStatus });
+  };
+
   return (
     <>
       <Head>
@@ -18,11 +49,13 @@ const Login: NextPage = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form
-              className="space-y-6"
-              action={getApiLink() + "login"}
-              method="POST"
-            >
+            {/* Session Status */}
+            <AuthSessionStatus className="mb-4" status={status} />
+
+            {/* Validation Errors */}
+            <AuthValidationErrors className="mb-4" errors={errors} />
+
+            <form className="space-y-6" onSubmit={submitForm}>
               <div>
                 <label
                   htmlFor="email"
@@ -33,11 +66,12 @@ const Login: NextPage = () => {
                 <div className="mt-1">
                   <input
                     id="email"
-                    name="email"
                     type="email"
-                    autoComplete="email"
-                    required
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    required
+                    autoFocus
                   />
                 </div>
               </div>
@@ -52,11 +86,12 @@ const Login: NextPage = () => {
                 <div className="mt-1">
                   <input
                     id="password"
-                    name="password"
                     type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                     autoComplete="current-password"
-                    required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    required
                   />
                 </div>
               </div>
