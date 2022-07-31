@@ -6,6 +6,7 @@ import {
   FilterIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { useAuth } from "../hooks/auth";
 
 const navigation = [
   { name: "Projects", href: "#", icon: FolderIcon, current: true },
@@ -17,6 +18,7 @@ function classNames(...classes: any) {
 }
 
 export default function Layout({ children }: any) {
+  const { user } = useAuth({ middleware: "auth" });
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
