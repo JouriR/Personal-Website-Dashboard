@@ -1,4 +1,6 @@
-const AuthSessionStatus = ({ status, className, ...props }) => (
+import { SessionStatusProps } from "../../types/authTypes";
+
+const AuthSessionStatus = ({ status, className, ...props }: SessionStatusProps) => (
   <>
     {status && (
       <div
