@@ -2,8 +2,12 @@ import useSWR from "swr";
 import axios from "../lib/axios";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import type { AuthProps, LoginProps } from "../types/authTypes";
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+export const useAuth = ({
+  middleware,
+  redirectIfAuthenticated,
+}: AuthProps = {}) => {
   const router = useRouter();
 
   const {
@@ -23,11 +27,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
   const csrf = () => axios.get("/sanctum/csrf-cookie");
 
-  const login = async ({ setErrors, setStatus, ...props }) => {
+  const login = async ({ setErrors, setStatus, ...props }: LoginProps) => {
     await csrf();
 
     setErrors([]);
-    setStatus(null);
+    setStatus(null!);
 
     axios
       .post("/login", props)
@@ -35,7 +39,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
-        setErrors(Object.values(error.response.data.errors).flat());
+        /* 
+          Check to see if errorsArray is really an array to fix the TypeScript error:
+          Argument of type 'unknown[]' is not assignable to parameter of type 'SetStateAction<string[]>'.
+         */
+        let errorsArray = Object.values(error.response.data.errors).flat();
+        if (Array.isArray(errorsArray)) {
+          setErrors(errorsArray);
+        }
       });
   };
 
@@ -52,6 +63,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       router.push(redirectIfAuthenticated);
 
     if (middleware === "auth" && error) logout();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, error]);
 
   return {
