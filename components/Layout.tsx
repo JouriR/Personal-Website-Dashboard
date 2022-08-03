@@ -10,7 +10,7 @@ import { useAuth } from "../hooks/auth";
 import LogoutButton from "./LogoutButton";
 
 const navigation = [
-  { name: "Projects", href: "#", icon: FolderIcon, current: true },
+  { name: "Projects", href: "/projects", icon: FolderIcon, current: true },
   { name: "Categories", href: "#", icon: FilterIcon, current: false },
 ];
 
