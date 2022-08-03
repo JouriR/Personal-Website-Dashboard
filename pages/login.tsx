@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { getApiLink } from "../imports/functions";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "../hooks/auth";
 import Head from "next/head";
 import AuthSessionStatus from "../components/auth/AuthSessionStatus";
@@ -18,17 +17,18 @@ const Login: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<string | null>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (router.query.reset?.length > 0 && errors.length === 0) {
-      setStatus(atob(router.query.reset));
+    if (router.query.reset!?.length > 0 && errors.length === 0) {
+      setStatus(decodeURI(router.query.reset));
     } else {
       setStatus(null);
     }
   });
 
-  const submitForm = async (event) => {
+  const submitForm = async (event: FormEvent) => {
     event.preventDefault();
 
     login({ email, password, setErrors, setStatus });

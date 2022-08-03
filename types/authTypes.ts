@@ -7,10 +7,10 @@ export type AuthProps = {
 
 export type LoginProps = {
   setErrors: Dispatch<SetStateAction<Array<string>>>;
-  setStatus: Dispatch<SetStateAction<number>>;
+  setStatus: Dispatch<SetStateAction<string | null>>;
 };
 
 export type SessionStatusProps = {
-  status: number;
+  status: string | null;
   className?: string;
 };
