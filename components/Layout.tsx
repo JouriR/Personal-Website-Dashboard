@@ -7,6 +7,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useAuth } from "../hooks/auth";
+import LogoutButton from "./LogoutButton";
 
 const navigation = [
   { name: "Projects", href: "#", icon: FolderIcon, current: true },
@@ -107,6 +108,8 @@ export default function Layout({ children }: any) {
                       ))}
                     </nav>
                   </div>
+
+                  <LogoutButton />
                 </Dialog.Panel>
               </Transition.Child>
               <div className="flex-shrink-0 w-14" aria-hidden="true"></div>
@@ -147,6 +150,8 @@ export default function Layout({ children }: any) {
                 ))}
               </nav>
             </div>
+
+            <LogoutButton />
           </div>
         </div>
 
