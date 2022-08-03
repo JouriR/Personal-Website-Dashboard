@@ -6,6 +6,8 @@ import {
   FilterIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { useAuth } from "../hooks/auth";
+import LogoutButton from "./LogoutButton";
 
 const navigation = [
   { name: "Projects", href: "/projects", icon: FolderIcon, current: true },
@@ -17,6 +19,7 @@ function classNames(...classes: any) {
 }
 
 export default function Layout({ children }: any) {
+  const { user } = useAuth({ middleware: "auth" });
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -105,6 +108,8 @@ export default function Layout({ children }: any) {
                       ))}
                     </nav>
                   </div>
+
+                  <LogoutButton />
                 </Dialog.Panel>
               </Transition.Child>
               <div className="flex-shrink-0 w-14" aria-hidden="true"></div>
@@ -145,6 +150,8 @@ export default function Layout({ children }: any) {
                 ))}
               </nav>
             </div>
+
+            <LogoutButton />
           </div>
         </div>
 
