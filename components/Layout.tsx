@@ -7,7 +7,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useAuth } from "../hooks/auth";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./ButtonLogout";
 
 const navigation = [
   { name: "Projects", href: "/projects", icon: FolderIcon, current: true },
