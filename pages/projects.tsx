@@ -6,6 +6,7 @@ import axios from "../lib/axios";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import LinkButton from "../components/LinkButton";
+import LinkPrimary from "../components/LinkPrimary";
 
 const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
   return (
@@ -45,6 +46,9 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
                 <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                   <span className="sr-only">Edit</span>
                 </th>
+                <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                  <span className="sr-only">Delete</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
@@ -63,19 +67,16 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
                     {project.id}
                   </td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit<span className="sr-only">, {project.title}</span>
-                    </a>
+                    <LinkPrimary href={`projects/edit/${project.id}`}>
+                      Edit
+                    </LinkPrimary>
                   </td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                     <a
-                      href="#"
+                      href={`projects/delete/${project.id}`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
-                      Delete<span className="sr-only">, {project.title}</span>
+                      Delete
                     </a>
                   </td>
                 </tr>

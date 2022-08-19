@@ -5,12 +5,14 @@ import {
   MenuAlt2Icon,
   FilterIcon,
   XIcon,
+  CollectionIcon
 } from "@heroicons/react/outline";
 import { useAuth } from "../hooks/auth";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./ButtonLogout";
 
 const navigation = [
-  { name: "Projects", href: "/projects", icon: FolderIcon, current: true },
+  { name: "Overview", href: "/", icon: CollectionIcon, current: true },
+  { name: "Projects", href: "/projects", icon: FolderIcon, current: false },
   { name: "Categories", href: "#", icon: FilterIcon, current: false },
 ];
 
