@@ -74,6 +74,14 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
                       Edit<span className="sr-only">, {project.title}</span>
                     </a>
                   </td>
+                  <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <a
+                      href="#"
+                      className="text-indigo-600 hover:text-indigo-900"
+                    >
+                      Delete<span className="sr-only">, {project.title}</span>
+                    </a>
+                  </td>
                 </tr>
               ))}
             </tbody>
