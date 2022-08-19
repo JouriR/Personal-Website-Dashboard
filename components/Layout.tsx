@@ -13,7 +13,7 @@ import LogoutButton from "./ButtonLogout";
 const navigation = [
   { name: "Overview", href: "/", icon: CollectionIcon, current: true },
   { name: "Projects", href: "/projects", icon: FolderIcon, current: false },
-  { name: "Categories", href: "#", icon: FilterIcon, current: false },
+  { name: "Categories", href: "/categories", icon: FilterIcon, current: false },
 ];
 
 function classNames(...classes: any) {
