@@ -1,9 +1,14 @@
 import { ReactElement } from "react";
+import { GetServerSideProps } from "next";
 import { NextPageWithLayout } from "./_app";
+import { ProjectsProps } from "../types/projectTypes";
+import axios from "../lib/axios";
 import Layout from "../components/Layout";
 import Head from "next/head";
 
-const Projects: NextPageWithLayout = () => {
+const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
+  console.log(projects);
+
   const people = [
     {
       name: "Lindsay Walton",
@@ -98,6 +103,16 @@ const Projects: NextPageWithLayout = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await axios.get("/projects");
+
+  return {
+    props: {
+      projects: response.data,
+    },
+  };
 };
 
 Projects.getLayout = function getLayout(page: ReactElement) {
