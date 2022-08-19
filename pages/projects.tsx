@@ -59,7 +59,7 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
                     <dl className="font-normal lg:hidden">
                       <dt className="sr-only">Title</dt>
                       <dd className="mt-1 truncate text-gray-700">
-                        {project.title}
+                        {project.id}
                       </dd>
                     </dl>
                   </td>
