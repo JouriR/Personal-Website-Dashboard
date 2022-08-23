@@ -14,3 +14,7 @@ export interface Project {
 export interface ProjectsProps {
   projects?: Array<Project>;
 }
+
+export interface ProjectProps {
+  project?: Project;
+}

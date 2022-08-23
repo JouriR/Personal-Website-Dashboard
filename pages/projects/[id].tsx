@@ -1,13 +1,14 @@
 import { ReactElement } from "react";
 import { GetServerSideProps } from "next";
 import { NextPageWithLayout } from "../_app";
-import { ProjectsProps } from "../../types/projectTypes";
+import { ProjectProps } from "../../types/projectTypes";
 import axios from "../../lib/axios";
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import LinkButton from "../../components/LinkButton";
 
-const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
+const ProjectEdit: NextPageWithLayout = ({ project }: ProjectProps) => {
+  console.log(project);
   return (
     <>
       <Head>
@@ -18,9 +19,7 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">Edit Page</h1>
-            <p className="mt-2 text-sm text-gray-700">
-              Edit this project.
-            </p>
+            <p className="mt-2 text-sm text-gray-700">Edit this project.</p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <LinkButton href="projects/create">Delete Project</LinkButton>
@@ -34,18 +33,19 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const response = await axios.get("/projects");
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const projectId = context.params?.id;
+  const response = await axios.get(`/projects/${projectId}`);
 
-//   return {
-//     props: {
-//       projects: response.data,
-//     },
-//   };
-// };
+  return {
+    props: {
+      project: response.data,
+    },
+  };
+};
 
-Projects.getLayout = function getLayout(page: ReactElement) {
+ProjectEdit.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export default Projects;
+export default ProjectEdit;
