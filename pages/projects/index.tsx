@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 import { GetServerSideProps } from "next";
-import { NextPageWithLayout } from "./_app";
-import { ProjectsProps } from "../types/projectTypes";
-import axios from "../lib/axios";
-import Layout from "../components/Layout";
+import { NextPageWithLayout } from "../_app";
+import { ProjectsProps } from "../../types/projectTypes";
+import axios from "../../lib/axios";
+import Layout from "../../components/Layout";
 import Head from "next/head";
-import LinkButton from "../components/LinkButton";
-import LinkPrimary from "../components/LinkPrimary";
+import LinkButton from "../../components/LinkButton";
+import LinkPrimary from "../../components/LinkPrimary";
 
 const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
   return (
@@ -67,7 +67,7 @@ const Projects: NextPageWithLayout = ({ projects }: ProjectsProps) => {
                     {project.id}
                   </td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                    <LinkPrimary href={`projects/edit/${project.id}`}>
+                    <LinkPrimary href={`projects/${project.id}`}>
                       Edit
                     </LinkPrimary>
                   </td>
